@@ -1,0 +1,95 @@
+# Outdoor Social Pipeline Configuration
+# =======================================
+
+# --- 關鍵字設定（15 個，≤30 credits/日）---
+keywords:
+  # ads_product：品類+購買意圖（直接對應 Google Ads 投放詞）
+  ads_product:
+    - "登山鞋推薦"
+    - "登山包推薦"
+    - "帳篷推薦"
+    - "攻頂包"
+    - "露營"
+    - "快乾毛巾"
+    - "防水"
+    - "登山裝備"
+
+  # ads_scenario：情境（受眾發現 + 長尾關鍵字挖掘）
+  ads_scenario:
+    - "新手登山"
+    - "百岳"
+    - "裝備輕量化"
+
+  # ads_brand：競品聲量監測
+  ads_brand:
+    - "始祖鳥"
+    - "The North Face"
+    - "迪卡儂 登山"
+    - "Osprey"
+
+# --- 商家文篩選詞 ---
+commercial_terms:
+  - "LINE ID"
+  - "歡迎諮詢"
+  - "限時優惠"
+  - "團購"
+  - "代購"
+  - "蝦皮"
+  - "免運"
+  - "下單"
+  - "售價"
+  - "現貨"
+  - "互追"
+  - "漲粉"
+  - "招募"
+  - "接業配"
+  - "合作邀約"
+  - "批發"
+
+# --- 意圖分類 + 噪音過濾 ---
+transform:
+  intent_patterns:
+    求推薦: "推薦|求推|請問.*好用|有沒有人用過|哪裡買"
+    開箱分享: "開箱|入手|敗家|心得|評測"
+    抱怨負評: "踩雷|不推|難穿|太重|壞掉|退貨|失望|後悔"
+    詢問比較: "比較|差在哪|選.*還是|VS|cp值"
+    二手轉讓: "出清|二手|免費送|用不到|轉讓"
+    揪團找伴: "揪|找山友|一起爬|徵伴"
+    路線分享: "路線|行程|GPX|紀錄|遊記"
+  noise_filters:
+    防水: "(防水工程|抓漏|防水膠|房屋|屋頂|浴室)"
+    露營: "(露營車出租|露營區訂位|露營區推薦.*LINE)"
+
+# --- 爬蟲設定 ---
+scraper:
+  min_rounds: 1
+  max_rounds: 2
+  dup_threshold: 0.7
+
+# --- BigQuery ---
+bigquery:
+  project_id: "dasp04"
+  dataset_id: "social_media"
+  table_id: "outdoor_threads_posts"
+
+# --- Google Sheets ---
+gsheets:
+  sheet_id: "<TBD>"
+  worksheet_name: "outdoor_raw"
+  creds_path: "/opt/airflow/config/gsheets-key.json"
+  columns:
+    - "post_date"
+    - "username"
+    - "text"
+    - "permalink"
+    - "keyword_tier"
+    - "search_keyword"
+    - "intent_type"
+    - "mentioned_brands"
+    - "mentioned_gear"
+    - "total_engagement"
+    - "scrape_date"
+
+# --- 通知 ---
+notification:
+  email_to: "rex.chan@fnte.com.tw"
