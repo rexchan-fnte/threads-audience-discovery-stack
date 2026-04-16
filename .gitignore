@@ -1,6 +1,8 @@
 # JSON 預設全忽略，避免金鑰誤入
 *.json
-!docker/airflow/dags/etl_lib/schemas/*.json
+
+# Docker / Airflow 基礎設施（本地部署用，不進 git）
+docker/
 
 # Python bytecode and caches
 __pycache__/
