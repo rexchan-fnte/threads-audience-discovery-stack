@@ -1,5 +1,5 @@
 """
-Threads Social Pipeline DAG
+Threads Scraper Pipeline DAG
 =============================
 排程：每日 10:00, 15:00, 18:00 (Asia/Taipei)
 流程：Extract → Transform → Load BQ + Sheets → Email
@@ -318,10 +318,10 @@ def build_notification_content(**context):
         for kw, cnt in sorted(keyword_counts.items(), key=lambda x: -x[1])
     ) or '<tr><td colspan="2">無資料</td></tr>'
 
-    subject = f"[Threads Pipeline] {batch_date} 執行完成 - {raw_count} 篇"
+    subject = f"[Threads Scraper Pipeline] {batch_date} 執行完成 - {raw_count} 篇"
 
     body = (
-        '<h2>Threads Social Pipeline 執行報告</h2>'
+        '<h2>Threads Scraper Pipeline 執行報告</h2>'
         '<p><b>日期:</b> ' + batch_date + ' | <b>完成時間:</b> ' + now_str + '</p>'
 
         '<h3>爬蟲效率</h3>'
@@ -378,7 +378,7 @@ default_args = {
 }
 
 dag = DAG(
-    'threads_social_pipeline',
+    'threads_scraper_pipeline',
     default_args=default_args,
     description='Threads posts scraper + LLM reply generator pipeline',
     schedule='0 10,15,18 * * *',

@@ -324,7 +324,7 @@ def transform_outdoor_data(df: pd.DataFrame, config: dict) -> pd.DataFrame:
 ### Task 5：outdoor_social_pipeline.py（DAG + Email Report 內嵌）
 
 **檔案**：`docker/airflow/dags/outdoor_social_pipeline.py`
-**基底**：複製 `threads_social_pipeline.py`（444 行）並改造
+**基底**：複製 `threads_scraper_pipeline.py`（444 行）並改造
 
 **DAG 配置**：
 ```python
@@ -338,7 +338,7 @@ dag = DAG(
 
 **與原版差異**：
 
-| 項目 | threads_social_pipeline | outdoor_social_pipeline |
+| 項目 | threads_scraper_pipeline | outdoor_social_pipeline |
 |------|------------------------|------------------------|
 | Config | `threads_config.yaml` | `outdoor_config.yaml` |
 | Schedule | `0 10,15,18 * * *`（3 次/日） | `0 10 * * *`（1 次/日，省 credit） |

@@ -89,7 +89,7 @@ schedule='0 10,14,18 * * *'
 
 ---
 
-## 3. DAG：`threads_social_pipeline`
+## 3. DAG：`threads_scraper_pipeline`
 
 ### 3.1 Task 依賴鏈
 
@@ -212,7 +212,7 @@ docker compose ps
 
 ```bash
 # 方法 1：CLI
-docker exec threads_scheduler airflow dags trigger threads_social_pipeline
+docker exec threads_scheduler airflow dags trigger threads_scraper_pipeline
 
 # 方法 2：Web UI
 # 開啟 http://localhost:8082，登入後點擊 DAG → Trigger DAG ▶
@@ -221,7 +221,7 @@ docker exec threads_scheduler airflow dags trigger threads_social_pipeline
 ### 查看 Task 日誌
 
 ```bash
-docker exec threads_scheduler airflow tasks logs threads_social_pipeline extract_threads_posts <run_id>
+docker exec threads_scheduler airflow tasks logs threads_scraper_pipeline extract_threads_posts <run_id>
 ```
 
 ### 停止環境
